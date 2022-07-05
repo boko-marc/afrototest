@@ -1,0 +1,31 @@
+{
+  "name": "afroto",
+  "version": "1.0.0",
+  "description": "AFROTO API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/boko-marc/afrototest.git"
+  },
+  "author": "BOKO Marc",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/boko-marc/afrototest/issues"
+  },
+  "homepage": "https://github.com/boko-marc/afrototest#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "body-parser": "^1.20.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "mongoose": "^6.4.2",
+    "mongoose-unique-validator": "^3.1.0",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.18"
+  }
+}
