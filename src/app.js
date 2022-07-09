@@ -1,3 +1,5 @@
+
+// This file contain all API route and initialize server 
 const express = require('express');
 bodyParser = require('body-parser'),
   cors = require('cors');
@@ -22,4 +24,13 @@ app.use(bodyParser.json());
 app.get('/', (req, res) => {
   res.send({ message: "Afroto test API" })
 })
+
+// users route
+const UserRoute = require('./Routes/userRoute')
+app.use('/api/v1/user', UserRoute)
+
+// posts route
+const PostRoute = require('./Routes/postRoute')
+app.use('/api/v1/post', PostRoute)
+
 module.exports = app;

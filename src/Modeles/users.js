@@ -1,10 +1,9 @@
 const mongoose = require('mongoose');
-const uniqueValidator = require('mongoose-unique-validator');
 const bcrypt = require('bcrypt');
 // role = 0:user role = 1 :admin
 
 const UserSchema = mongoose.Schema({
-    name : {type:String,required:true, unique:true},
+    name : {type:String,required:true},
 
     email : {type:String,required:true,unique:true},
 
@@ -31,10 +30,10 @@ const UserSchema = mongoose.Schema({
 
 }
 );
-UserSchema.plugin(uniqueValidator);
 // hash password where is update or create new user
+
 UserSchema.pre("save", function(next) {
-    if (this.isModified("password") || this.isNew()) {
+    if (this.password) {
      this.password = bcrypt.hashSync(this.password, 12);
     }
     next();
