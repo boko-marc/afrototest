@@ -16,9 +16,9 @@ module.exports = async (req,res,next) => {
     const userId = await decodedToken.userId;  
     // store userId in req.auth.userId,
     req.auth={userId}
-    if(req.body.author || req.params.id)
+    if(req.body.author || req.params.id || req.query.author)
       {
-        if (req.params.id === userId || req.body.author === userId)
+        if (req.params.id === userId || req.body.author === userId || req.query.author === userId)
          {
             next();
          } 

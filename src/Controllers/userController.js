@@ -4,25 +4,30 @@ const bcrypt = require('bcrypt');
 
 // dotenv package to acces environment variables
 require('dotenv').config()
-// create user account ,paasword will be automaticaly hashed 
 
+// verify request email format
+function verifemail (str) {
+    const filter =
+      /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i
+    if (!filter.test(str)) {
+      return false
+    }
+  }
+  // create user account ,paasword will be automaticaly hashed 
 exports.register = (req,res,next) => {
     try {
         // verify request body
-        const v = new Validator();
-        const rules = {
-            name:'string|min:4',
-            name:'string',
-            birthdate:'date',
-            email:'email',
-            password:'string|min:8'
-        }
+    
         if(!req.body.name || !req.body.email || !req.body.birthdate || !req.body.bio || ! req.body.password)
         {
             return res.status(400).json({
                 message: 'Name, Bio,Password, email and birthdate are required'
             })
         }
+       if(verifemail(req.body.email) == false)
+       {
+            return res.json({message : 'Email format is incorrect'})
+       }
         // verify is email is already use
         User.findOne({email: req.body.email}).then((user) => {
             if(!user)
@@ -101,7 +106,10 @@ exports.updateUser = (req,res,next) => {
             message: 'Name, Bio,Password, email and birthdate are required'
         })
     }
-   
+    if(verifemail(req.body.email) == false)
+    {
+         return res.json({message : 'Email format is incorrect'})
+    }
     // who want modify account?
     User.findById(req.auth.userId).then(user=> {
         if(user.role == 1)

@@ -79,7 +79,7 @@ exports.updatePost = (req,res,next) => {
 
 // get all post create by user logged
 exports.getPostsByUserLogged = (req,res, next) => {
-    Post.findOne({author: req.params.id}).populate('author').then((posts) => {
+    Post.findOne({author: req.query.author}).populate('author').then((posts) => {
        return res.json({message: 'All post created', posts})
     })
 }
